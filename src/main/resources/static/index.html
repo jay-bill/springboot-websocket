@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WebSocket测试</title>
+</head>
+<body>
+	<div>
+		<button onclick="openWS()">开启websocket</button>
+	</div>
+	<div id="wsDiv">
+		
+	</div>
+</body>
+<script type="text/javascript">
+	function openWS(){
+		var url = 'ws://'+window.location.host+'/websocket/handler';
+		var socket = new WebSocket(url);
+		//开启连接
+		socket.onopen = function(){
+			console.log("开启websocket连接！");
+			say();
+		}
+		//处理文本
+		socket.onmessage = function(e){
+			var para=document.createElement("p");  
+			para.innerHTML = e.data;
+			document.getElementById("wsDiv").appendChild(para);
+			setTimeout(function(){
+				say();
+			},2000);//每两秒发送一次
+		}
+		//关闭连接
+		socket.onclose = function(){
+			console.log("关闭websocket连接");			
+		}
+		
+		function say(){
+			socket.send("你好，服务器！");
+		}
+	}
+</script>
+</html>
