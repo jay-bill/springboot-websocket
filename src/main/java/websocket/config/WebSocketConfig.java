@@ -18,7 +18,8 @@ public class WebSocketConfig implements WebSocketConfigurer{
 
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(new WebSocketHandler(), "/websocket/handler");
+		registry.addHandler(new WebSocketHandler(), "/websocket/handler")//使用原生websocket功能
+		.withSockJS();//使用SockJs的websocket功能
 	}
 
 }

@@ -12,10 +12,15 @@
 		
 	</div>
 </body>
+<!-- sockJS所对应的库 -->
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>  
 <script type="text/javascript">
 	function openWS(){
-		var url = 'ws://'+window.location.host+'/websocket/handler';
-		var socket = new WebSocket(url);
+//		var url = 'ws://'+window.location.host+'/websocket/handler';
+//		var socket = new WebSocket(url);
+		//使用sockJS代替WebSocket
+		var url = "websocket/handler";
+		var socket = new SockJS(url);
 		//开启连接
 		socket.onopen = function(){
 			console.log("开启websocket连接！");
